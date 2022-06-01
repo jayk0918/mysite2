@@ -18,6 +18,7 @@ public class MainController extends HttpServlet {
 	// 일반
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		System.out.println("mainController");
 		
 		// forward
