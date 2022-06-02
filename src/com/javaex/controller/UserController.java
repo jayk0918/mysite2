@@ -55,7 +55,7 @@ public class UserController extends HttpServlet {
 				System.out.println("로그인 성공");
 				
 				HttpSession session = request.getSession();
-				session.setAttribute("yn", "y");
+				session.setAttribute("authUser", authUser);
 				
 				WebUtil.redirect(request, response, "/mysite2/main");
 			}

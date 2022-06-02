@@ -48,7 +48,6 @@ public class UserDao {
 		}
 	}
 
-
 	// insert
 	public int insert(UserVo userVo) {
 		int count = -1;
@@ -78,43 +77,41 @@ public class UserDao {
 		close();
 		return count;
 	}
-	
-	// login
-		public UserVo getUser(UserVo userVo) {
-			getConnection();
-			
-			UserVo authUser = new UserVo();
-			
-			try {
-				String query = "";
-				query += " select no ";
-				query += "       ,name ";
-				query += " from users ";
-				query += " where id = ? ";
-				query += " and password = ? ";
-				
-				pstmt = conn.prepareStatement(query);
-				pstmt.setString(1, userVo.getId());
-				pstmt.setString(2, userVo.getPassword());
 
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()) {
-					int no = rs.getInt("no");
-					String name = rs.getString("name");
-					
-					authUser = new UserVo();
-					authUser.setNo(no);
-					authUser.setName(name);
-				}
-				
-			} catch (SQLException e) {
-				System.out.println("error:" + e);
+	// login
+	public UserVo getUser(UserVo userVo) {
+		UserVo authUser = null;
+
+		getConnection();
+
+		try {
+			String query = "";
+			query += " select no ";
+			query += "       ,name ";
+			query += " from users ";
+			query += " where id = ? ";
+			query += " and password = ? ";
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userVo.getId());
+			pstmt.setString(2, userVo.getPassword());
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int no = rs.getInt("no");
+				String name = rs.getString("name");
+
+				authUser = new UserVo();
+				authUser.setNo(no);
+				authUser.setName(name);
 			}
-			close();
-			return authUser;
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
 		}
-	
-	
-	
+		close();
+		return authUser;
+	}
+
 }
