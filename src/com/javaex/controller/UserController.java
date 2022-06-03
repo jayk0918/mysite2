@@ -21,7 +21,6 @@ public class UserController extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		
-		
 		if("joinForm".equals(action)) {
 			WebUtil.forward(request, response, "/WEB-INF/views/user/joinForm.jsp");
 			
@@ -70,6 +69,7 @@ public class UserController extends HttpServlet {
 			session.invalidate();
 			
 			WebUtil.redirect(request, response, "/mysite2/main");
+			
 		}else if("modifyForm".equals(action)) {
 			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
 			
@@ -89,12 +89,11 @@ public class UserController extends HttpServlet {
 			
 			UserDao userDao = new UserDao();
 			UserVo authUser = userDao.userUpdate(userVo);
-			
-			WebUtil.redirect(request, response, "/mysite2/main");
-			
+
 			HttpSession session = request.getSession();
 			session.setAttribute("authUser", authUser);
 			
+			WebUtil.redirect(request, response, "/mysite2/main");
 		}
 	}
 

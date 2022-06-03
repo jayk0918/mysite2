@@ -5,7 +5,6 @@
 <%
 	UserVo authUser = (UserVo)session.getAttribute("authUser");
 	System.out.println(authUser);
-	String yn = (String)session.getAttribute("yn");
 %>
 
 <!DOCTYPE html>
