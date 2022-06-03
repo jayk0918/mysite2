@@ -87,7 +87,6 @@ public class UserDao {
 		try {
 			String query = "";
 			query += " select no ";
-			query += "       ,id ";
 			query += "       ,name ";
 			query += " from users ";
 			query += " where id = ? ";
@@ -101,12 +100,10 @@ public class UserDao {
 
 			while (rs.next()) {
 				int no = rs.getInt("no");
-				String id = rs.getString("id");
 				String name = rs.getString("name");
 
 				authUser = new UserVo();
 				authUser.setNo(no);
-				authUser.setId(id);
 				authUser.setName(name);
 			}
 
@@ -116,10 +113,10 @@ public class UserDao {
 		close();
 		return authUser;
 	}
-	
+
 	// update
-	public UserVo userUpdate(UserVo userVo) {
-		UserVo authUser = null;
+	public int userUpdate(UserVo userVo) {
+		int count = -1;
 		
 		getConnection();
 		try {
@@ -136,38 +133,54 @@ public class UserDao {
 			pstmt.setString(3, userVo.getGender());
 			pstmt.setInt(4, userVo.getNo());
 
-			rs = pstmt.executeQuery();
+			count = pstmt.executeUpdate();
 			
+			System.out.println(count + " 건이 수정되었습니다.");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+		return count;
+	}
+
+	// 사용자 정보 select(no, id, password, name gender)
+	public UserVo getUser(int no) {
+		UserVo userVo = null;
+
+		getConnection();
+
+		try {
+			String query = "";
+			query += " select no ";
+			query += "       ,id ";
+			query += "       ,password ";
+			query += "       ,name ";
+			query += "       ,gender ";
+			query += " from users ";
+			query += " where no = ? ";
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+
+			rs = pstmt.executeQuery();
+
 			while (rs.next()) {
-				int no = rs.getInt("no");
-				String name = rs.getString("name");
+				int userno = rs.getInt("no");
+				String id = rs.getString("id");
 				String password = rs.getString("password");
+				String name = rs.getString("name");
 				String gender = rs.getString("gender");
 
-				authUser = new UserVo();
-				authUser.setNo(no);
-				authUser.setName(name);
-				authUser.setPassword(password);
-				authUser.setGender(gender);
+				userVo = new UserVo(userno, id, password, name, gender);
+
 			}
 
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		}
 		close();
-		return authUser;
+		return userVo;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

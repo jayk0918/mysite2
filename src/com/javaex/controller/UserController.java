@@ -19,6 +19,8 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		String action = request.getParameter("action");
 		
 		if("joinForm".equals(action)) {
@@ -71,27 +73,41 @@ public class UserController extends HttpServlet {
 			WebUtil.redirect(request, response, "/mysite2/main");
 			
 		}else if("modifyForm".equals(action)) {
-			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
+			// 로그인 check (로그인하지 않고 들어왔을 때 에러)
+			if(authUser== null) {
+				WebUtil.redirect(request, response, "/mysite2/user?action=loginForm");
+			}else {
+				// 로그인 한 사용자의 no값을 세션으로부터 채용
+				HttpSession session = request.getSession();
+				UserVo authUser = (UserVo)session.getAttribute("authUser");
+				int no = authUser.getNo();
+				
+				UserDao userDao = new UserDao();
+				UserVo userVo = userDao.getUser(no);
+				
+				request.setAttribute("userVo", userVo);
+				
+				WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
+			}
 			
 		}else if("modify".equals(action)) {
+			// session에서 no를 채용
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
 			
-			int no = Integer.parseInt(request.getParameter("no"));
+			int no = authUser.getNo();
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
 			String gender = request.getParameter("gender");
 			
 			UserVo userVo = new UserVo();
-			
 			userVo.setNo(no);
 			userVo.setName(name);
 			userVo.setPassword(password);
 			userVo.setGender(gender);
 			
 			UserDao userDao = new UserDao();
-			UserVo authUser = userDao.userUpdate(userVo);
-
-			HttpSession session = request.getSession();
-			session.setAttribute("authUser", authUser);
+			int count = userDao.userUpdate(userVo);
 			
 			WebUtil.redirect(request, response, "/mysite2/main");
 		}
