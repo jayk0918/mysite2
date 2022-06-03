@@ -15,7 +15,7 @@
 
 		<div id="header" class="clearfix">
 			<h1>
-				<a href="">MySite</a>
+				<a href="/mysite2/main">MySite</a>
 			</h1>
 
 			<!-- 
@@ -48,8 +48,8 @@
 				<h2>회원</h2>
 				<ul>
 					<li>회원정보</li>
-					<li>로그인</li>
-					<li>회원가입</li>
+					<li><a href = "/mysite2/user?action=loginForm">로그인</a></li>
+					<li><a href = "/mysite2/user?action=joinForm">회원가입</a></li>
 				</ul>
 			</div>
 			<!-- //aside -->
@@ -89,7 +89,7 @@
 
 
 		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
+			Copyright ⓒ 2022 김재환 All rights reserved.
 		</div>
 		<!-- //footer -->
 

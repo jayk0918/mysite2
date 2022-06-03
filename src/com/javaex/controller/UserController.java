@@ -21,6 +21,7 @@ public class UserController extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		
+		
 		if("joinForm".equals(action)) {
 			WebUtil.forward(request, response, "/WEB-INF/views/user/joinForm.jsp");
 			
@@ -51,6 +52,7 @@ public class UserController extends HttpServlet {
 			
 			if(authUser == null) {
 				System.out.println("로그인 실패");
+				WebUtil.redirect(request, response, "/mysite2/user?action=loginForm");
 			}else {
 				System.out.println("로그인 성공");
 				
@@ -68,9 +70,32 @@ public class UserController extends HttpServlet {
 			session.invalidate();
 			
 			WebUtil.redirect(request, response, "/mysite2/main");
+		}else if("modifyForm".equals(action)) {
+			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
+			
+		}else if("modify".equals(action)) {
+			
+			int no = Integer.parseInt(request.getParameter("no"));
+			String password = request.getParameter("password");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
+			
+			UserVo userVo = new UserVo();
+			
+			userVo.setNo(no);
+			userVo.setName(name);
+			userVo.setPassword(password);
+			userVo.setGender(gender);
+			
+			UserDao userDao = new UserDao();
+			UserVo authUser = userDao.userUpdate(userVo);
+			
+			WebUtil.redirect(request, response, "/mysite2/main");
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("authUser", authUser);
+			
 		}
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

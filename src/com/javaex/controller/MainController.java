@@ -14,11 +14,8 @@ public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("mainController");
 		// forward
 		WebUtil.forward(request, response, "/WEB-INF/views/main/index.jsp");
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
