@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+	int no = Integer.parseInt(request.getParameter("no"));
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,8 +31,8 @@
 			</ul>
 			-->	
 			<ul>
-				<li><a href="" class="btn_s">로그인</a></li>
-				<li><a href="" class="btn_s">회원가입</a></li>
+				<li><a href="/mysite2/user?action=loginForm" class="btn_s">로그인</a></li>
+				<li><a href="/mysite2/user?action=joinForm" class="btn_s">회원가입</a></li>
 			</ul>
 			
 		</div>
@@ -38,7 +43,7 @@
 				<li><a href="">입사지원서</a></li>
 				<li><a href="">게시판</a></li>
 				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
+				<li><a href="/mysite2/gbc?action=addList">방명록</a></li>
 			</ul>
 		</div>
 		<!-- //nav -->
@@ -47,7 +52,7 @@
 			<div id="aside">
 				<h2>방명록</h2>
 				<ul>
-					<li>일반방명록</li>
+					<li><a href = "/mysite2/gbc?action=addList">일반방명록</a></li>
 					<li>ajax방명록</li>
 				</ul>
 			</div>
@@ -69,7 +74,7 @@
 				<!-- //content-head -->
 	
 				<div id="guestbook">
-					<form action="" method="">
+					<form action="gbc" method="post">
 						<table id="guestDelete">
 							<colgroup>
 								<col style="width: 10%;">
@@ -78,14 +83,14 @@
 								<col style="width: 25%;">
 							</colgroup>
 							<tr>
-								<td>비밀번호</td>
-								<td><input type="password" name="pass"></td>
+								<td><label for = "password">비밀번호</label></td>
+								<td><input type="password" name="password"></input></td>
 								<td class="text-left"><button type="submit">삭제</button></td>
-								<td><a href="/guestbook2/gbc">[메인으로 돌아가기]</a></td>
+								<td><a href="/mysite2/gbc?action=addList">[메인으로 돌아가기]</a></td>
 							</tr>
 						</table>
-						<input type='hidden' name="" value="">
-						<input type='hidden' name="" value="">
+						<input type='hidden' name="no" value="<%=no%>">
+						<input type='hidden' name="action" value="delete">
 					</form>
 					
 				</div>
@@ -97,7 +102,7 @@
 		<!-- //container  -->
 		
 		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
+			Copyright ⓒ 2022 김재환 All rights reserved.
 		</div>
 		<!-- //footer -->
 

@@ -74,21 +74,19 @@ public class UserController extends HttpServlet {
 			
 		}else if("modifyForm".equals(action)) {
 			// 로그인 check (로그인하지 않고 들어왔을 때 에러)
-			if(authUser== null) {
-				WebUtil.redirect(request, response, "/mysite2/user?action=loginForm");
-			}else {
-				// 로그인 한 사용자의 no값을 세션으로부터 채용
-				HttpSession session = request.getSession();
-				UserVo authUser = (UserVo)session.getAttribute("authUser");
-				int no = authUser.getNo();
-				
-				UserDao userDao = new UserDao();
-				UserVo userVo = userDao.getUser(no);
-				
-				request.setAttribute("userVo", userVo);
-				
-				WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
-			}
+			
+			
+			// 로그인 한 사용자의 no값을 세션으로부터 채용
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			int no = authUser.getNo();
+			
+			UserDao userDao = new UserDao();
+			UserVo userVo = userDao.getUser(no);
+			
+			request.setAttribute("userVo", userVo);
+			
+			WebUtil.forward(request, response, "/WEB-INF/views/user/modifyForm.jsp");
 			
 		}else if("modify".equals(action)) {
 			// session에서 no를 채용
