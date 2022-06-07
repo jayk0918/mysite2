@@ -12,7 +12,7 @@
 
 <body>
 	<div id="wrap">
-		
+		<!-- header -->
 		<jsp:include page = "/WEB-INF/views/includes/header.jsp"></jsp:include>
 		<!-- //header -->
 
@@ -69,10 +69,8 @@
 		</div>
 		<!-- //container -->
 		
-		
-		<div id="footer">
-			Copyright ⓒ 2022 김재환 All rights reserved.
-		</div>
+		<!-- footer -->
+		<jsp:include page = "/WEB-INF/views/includes/footer.jsp"></jsp:include>
 		<!-- //footer -->
 
 	</div>
