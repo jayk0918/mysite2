@@ -27,7 +27,7 @@ public class GuestBookController extends HttpServlet {
 			GuestBookDao guestBookDao = new GuestBookDao();
 			List<GuestBookVo> gList = guestBookDao.getList();
 			
-			request.setAttribute("gbList", gList);
+			request.setAttribute("gList", gList);
 			
 			WebUtil.forward(request, response, "./WEB-INF/views/guestbook/addList.jsp");
 			

@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page import = "com.javaex.vo.UserVo"%>
-
-<%	
-	UserVo userVo = (UserVo)request.getAttribute("userVo");
-%>       
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +16,7 @@
 <body>
 	<div id="wrap">
 		<!-- header -->
-		<jsp:include page = "/WEB-INF/views/includes/header.jsp"></jsp:include>
+		<c:import url = "/WEB-INF/views/includes/header.jsp"></c:import>
 		<!-- //header -->
 
 		<div id="nav">
@@ -28,7 +24,7 @@
 				<li><a href="">입사지원서</a></li>
 				<li><a href="">게시판</a></li>
 				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
+				<li><a href="/mysite/user?action=addList">방명록</a></li>
 			</ul>
 		</div>
 		<!-- //nav -->
@@ -65,7 +61,7 @@
 						<p class="text-large bold">
 							회원가입을 축하합니다.<br>
 							<br>
-							<a href="" >[로그인하기]</a>
+							<a href="/mysite2/user?action=loginForm">[로그인하기]</a>
 						</p>
 							
 					</div>
@@ -79,7 +75,7 @@
 
 
 		<!-- footer -->
-		<jsp:include page = "/WEB-INF/views/includes/footer.jsp"></jsp:include>
+		<c:import url = "/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>
