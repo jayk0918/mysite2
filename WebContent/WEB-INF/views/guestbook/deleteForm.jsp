@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite2/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/mysite2/assets/css/guestbook.css" rel="stylesheet" type="text/css">
+<link href="/mysite2/assets/css/mysite.css" rel="stylesheet"
+	type="text/css">
+<link href="/mysite2/assets/css/guestbook.css" rel="stylesheet"
+	type="text/css">
 
 </head>
 
@@ -16,25 +18,25 @@
 	<div id="wrap">
 
 		<!-- header -->
-		<c:import url = "/WEB-INF/views/includes/header.jsp"></c:import>
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<!-- //header -->
 
 		<!-- nav -->
-		<c:import url = "/WEB-INF/views/includes/nav.jsp"></c:import>
+		<c:import url="/WEB-INF/views/includes/nav.jsp"></c:import>
 		<!-- //nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
 				<h2>방명록</h2>
 				<ul>
-					<li><a href = "/mysite2/gbc?action=addList">일반방명록</a></li>
+					<li><a href="/mysite2/gbc?action=addList">일반방명록</a></li>
 					<li>ajax방명록</li>
 				</ul>
 			</div>
 			<!-- //aside -->
 
 			<div id="content">
-			
+
 				<div id="content-head">
 					<h3>일반방명록</h3>
 					<div id="location">
@@ -47,7 +49,7 @@
 					<div class="clear"></div>
 				</div>
 				<!-- //content-head -->
-	
+
 				<div id="guestbook">
 					<form action="gbc" method="post">
 						<table id="guestDelete">
@@ -58,16 +60,16 @@
 								<col style="width: 25%;">
 							</colgroup>
 							<tr>
-								<td><label for = "password">비밀번호</label></td>
+								<td><label for="password">비밀번호</label></td>
 								<td><input type="password" name="password"></input></td>
 								<td class="text-left"><button type="submit">삭제</button></td>
 								<td><a href="/mysite2/gbc?action=addList">[메인으로 돌아가기]</a></td>
 							</tr>
 						</table>
-						<input type='hidden' name="no" value="${param.no}]">
-						<input type='hidden' name="action" value="delete">
+						<input type='hidden' name="no" value="${param.no}]"> <input
+							type='hidden' name="action" value="delete">
 					</form>
-					
+
 				</div>
 				<!-- //guestbook -->
 			</div>
@@ -75,9 +77,9 @@
 
 		</div>
 		<!-- //container  -->
-		
+
 		<!-- footer -->
-		<c:import url = "/WEB-INF/views/includes/footer.jsp"></c:import>
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>

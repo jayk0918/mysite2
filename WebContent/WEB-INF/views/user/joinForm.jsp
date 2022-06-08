@@ -19,7 +19,7 @@
 		<!-- //header -->
 
 		<!-- nav -->
-		<c:import url = "/WEB-INF/views/includes/nav.jsp"></c:import>
+		<c:import url="/WEB-INF/views/includes/nav.jsp"></c:import>
 		<!-- //nav -->
 
 		<div id="container" class="clearfix">
