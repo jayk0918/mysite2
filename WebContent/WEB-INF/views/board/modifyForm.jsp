@@ -59,17 +59,17 @@
 							<!-- 제목 -->
 							<div class="form-group">
 								<label class="form-text" for="txt-title">제목</label>
-								<input type="text" id="txt-title" name="title"></input>
+								<input type="text" id="txt-title" name = "title"></input>
 							</div>
 						
 							
 						
 							<!-- 내용 -->
 							<div class="form-group">
-								<textarea id="txt-content"></textarea>
+								<textarea id="txt-content" name = "content"></textarea>
 							</div>
 							
-							<a id="btn_cancel" href="/mysite2/bc?action=list">취소</a>
+							<a id="btn_cancel" href="/mysite2/bc?action=read&no=${boardVo.no}">취소</a>
 							<input type = "hidden" name = "action" value = "modify"></input>
 							<button id="btn_modify" type="submit">수정</button>
 							

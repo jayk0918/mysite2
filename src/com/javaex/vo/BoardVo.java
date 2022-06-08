@@ -20,12 +20,11 @@ public class BoardVo {
 		this.no = no;
 		this.userNo = userNo;
 	}
-	
-	public BoardVo(int no, String title, String date, String content) {
+
+	public BoardVo(int no, String title, String content) {
 		this.no = no;
 		this.title = title;
 		this.content = content;
-		this.date = date;
 	}
 
 	public BoardVo(String title, String content, int userNo) {

@@ -76,10 +76,9 @@ public class BoardController extends HttpServlet {
 			
 			int no = Integer.parseInt(request.getParameter("no"));
 			String title = request.getParameter("title");
-			String date = request.getParameter("date");
 			String content = request.getParameter("content");
 			
-			BoardVo boardVo = new BoardVo(no, title, date, content);
+			BoardVo boardVo = new BoardVo(no, title, content);
 			BoardDao boardDao = new BoardDao();
 			boardDao.update(boardVo);
 			
