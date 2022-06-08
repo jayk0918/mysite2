@@ -71,11 +71,11 @@
 							
 							<c:choose>
 								<c:when test = "${boardVo.userNo == authUser.no}">
-									<a id="btn_modify" href="/mysite/bc?action=modifyForm&no=${boardVo.no}">수정</a>
+									<a id="btn_modify" href="/mysite2/bc?action=modifyForm&no=${boardVo.no}">수정</a>
 								</c:when>
 								<c:otherwise></c:otherwise>
 							</c:choose>
-							<a id="btn_modify" href="/myste/bc?action=list">목록</a>
+							<a id="btn_modify" href="/mysite2/bc?action=list">목록</a>
 						</form>
 						<!-- //form -->
 					</div>

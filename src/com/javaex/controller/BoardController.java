@@ -62,6 +62,29 @@ public class BoardController extends HttpServlet {
 			boardDao.delete(boardVo);
 			
 			WebUtil.redirect(request, response, "/mysite2/bc?action=list");
+		
+		}else if("modifyForm".equals(action)) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			BoardDao boardDao = new BoardDao();
+			BoardVo boardVo = boardDao.getInfo(no);
+			
+			request.setAttribute("boardVo", boardVo);
+			
+			WebUtil.forward(request, response, "./WEB-INF/views/board/modifyForm.jsp");
+			
+		}else if("modify".equals(action)) {
+			
+			int no = Integer.parseInt(request.getParameter("no"));
+			String title = request.getParameter("title");
+			String date = request.getParameter("date");
+			String content = request.getParameter("content");
+			
+			BoardVo boardVo = new BoardVo(no, title, date, content);
+			BoardDao boardDao = new BoardDao();
+			boardDao.update(boardVo);
+			
+			
+			WebUtil.redirect(request, response, "/mysite2/bc?action=list");
 		}
 		
 	}

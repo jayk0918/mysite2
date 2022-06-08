@@ -133,6 +133,7 @@ public class BoardDao {
 		try {
 			String query = "";
 			query += " select us.name name ";
+			query += "     	 ,br.no no ";
 			query += "     	 ,br.hit hit ";
 			query += "       ,br.reg_date reg_date ";
 			query += "       ,br.title title ";
@@ -149,6 +150,7 @@ public class BoardDao {
 
 			while (rs.next()) {
 				String name = rs.getString("name");
+				int num = rs.getInt("no");
 				int hit = rs.getInt("hit");
 				String date = rs.getString("reg_date");
 				String title = rs.getString("title");
@@ -157,6 +159,7 @@ public class BoardDao {
 
 				boardVo = new BoardVo();
 				boardVo.setName(name);
+				boardVo.setNo(num);
 				boardVo.setHit(hit);
 				boardVo.setDate(date);
 				boardVo.setTitle(title);
@@ -192,6 +195,35 @@ public class BoardDao {
 			System.out.println("error:" + e);
 		}
 
+		close();
+		return count;
+	}
+
+	// update
+	public int update(BoardVo boardVo) {
+		int count = -1;
+		getConnection();
+		try {
+			String query = "";
+			query += " update board ";
+			query += " set title = ? ";
+			query += "    ,content = ? ";
+			query += "    ,reg_date = ? ";
+			query += " where no = ? ";
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, boardVo.getTitle());
+			pstmt.setString(2, boardVo.getContent());
+			pstmt.setString(3, boardVo.getDate());
+			pstmt.setInt(4, boardVo.getNo());
+
+			count = pstmt.executeUpdate();
+
+			System.out.println("[" + count + "건 수정되었습니다.]");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
 		close();
 		return count;
 	}
