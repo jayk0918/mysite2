@@ -24,14 +24,45 @@ public class BoardController extends HttpServlet {
 		
 		if("list".equals(action)) {
 			BoardDao boardDao = new BoardDao();
-			List<BoardVo> gList = boardDao.getList();
+			List<BoardVo> bList = boardDao.getList();
 			
-			request.setAttribute("gList", gList);
+			request.setAttribute("bList", bList);
 			
 			WebUtil.forward(request, response, "./WEB-INF/views/board/list.jsp");
+			
+		}else if("writeForm".equals(action)) {
+			WebUtil.forward(request, response, "./WEB-INF/views/board/writeForm.jsp");
+			
+		}else if("insert".equals(action)) {
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			int userno = Integer.parseInt(request.getParameter("userno"));
+			
+			BoardVo boardVo = new BoardVo(title, content, userno);
+			BoardDao boardDao = new BoardDao();
+			
+			boardDao.insert(boardVo);
+			
+			WebUtil.redirect(request, response, "/mysite2/bc?action=list");
+			
+		}else if("read".equals(action)) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			BoardDao boardDao = new BoardDao();
+			BoardVo boardVo = boardDao.getInfo(no);
+			
+			request.setAttribute("boardVo", boardVo);
+			
+			WebUtil.forward(request, response, "./WEB-INF/views/board/read.jsp");
+			
+		}else if("delete".equals(action)) {
+			int no = Integer.parseInt(request.getParameter("no"));
+
+			BoardVo boardVo = new BoardVo(no);
+			BoardDao boardDao = new BoardDao();
+			boardDao.delete(boardVo);
+			
+			WebUtil.redirect(request, response, "/mysite2/bc?action=list");
 		}
-		
-		
 		
 	}
 

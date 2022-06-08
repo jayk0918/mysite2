@@ -56,14 +56,19 @@
 							</thead>
 							
 							<tbody>
-								<c:forEach items = "${gList}" var = "BoardVo" varStatus = "status">
+								<c:forEach items = "${bList}" var = "BoardVo" varStatus = "status">
 								<tr>
 									<td>${BoardVo.no}</td>
-									<td class="text-left"><a href="#">${BoardVo.title}</a></td>
+									<td class="text-left"><a href="/mysite2/bc?action=read&no=${BoardVo.no}">${BoardVo.title}</a></td>
 									<td>${BoardVo.name}</td>
 									<td>${BoardVo.hit}</td>
 									<td>${BoardVo.date}</td>
-									<td><a href="">[삭제]</a></td>
+									<c:choose>
+										<c:when test = "${BoardVo.userNo == authUser.no}">
+											<td><a href="/mysite2/bc?action=delete&no=${BoardVo.no}">[삭제]</a></td>
+										</c:when>
+										<c:otherwise></c:otherwise>
+									</c:choose>
 								</tr>
 								</c:forEach>
 							</tbody>
