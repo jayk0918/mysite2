@@ -251,7 +251,51 @@ public class BoardDao {
 		
 	}
 	
-	
+	// search
+	public List<BoardVo> search(String search) {
+		List<BoardVo> searchList = new ArrayList<BoardVo>();
+		getConnection();
+
+		try {
+			String query = "";
+			query += " select br.no no ";
+			query += "     	 ,br.title title ";
+			query += "       ,us.name name ";
+			query += "       ,br.hit hit ";
+			query += "       ,br.reg_date date ";
+			query += " from  board br, users us ";
+			query += " where  br.user_no = us.no ? ";
+			query += " and br.title = ? ";
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + search + "%");
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int no = rs.getInt("no");
+				String title = rs.getString("title");
+				String name = rs.getString("name");
+				int hit = rs.getInt("hit");
+				String date = rs.getString("date");
+
+				BoardVo boardVo = new BoardVo();
+				boardVo.setNo(no);
+				boardVo.setTitle(title);
+				boardVo.setName(name);
+				boardVo.setHit(hit);
+				boardVo.setDate(date);
+				searchList.add(boardVo);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+
+		close();
+		return searchList;
+	}
+
 	
 	
 	

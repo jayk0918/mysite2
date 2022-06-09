@@ -48,8 +48,9 @@ public class BoardController extends HttpServlet {
 		}else if("read".equals(action)) {
 			int no = Integer.parseInt(request.getParameter("no"));
 			BoardDao boardDao = new BoardDao();
-			BoardVo boardVo = boardDao.getInfo(no);
 			boardDao.hit(no);
+			
+			BoardVo boardVo = boardDao.getInfo(no);
 			request.setAttribute("boardVo", boardVo);
 			
 			WebUtil.forward(request, response, "./WEB-INF/views/board/read.jsp");
@@ -84,6 +85,16 @@ public class BoardController extends HttpServlet {
 			
 			
 			WebUtil.redirect(request, response, "/mysite2/bc?action=list");
+	
+		}else if("search".equals(action)) {
+			
+			String search = request.getParameter("search");
+			
+			BoardVo boardVo = new BoardVo();
+			boardVo.setTitle(search);
+			
+			
+			
 		}
 		
 	}
