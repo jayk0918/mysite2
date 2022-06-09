@@ -225,5 +225,34 @@ public class BoardDao {
 		close();
 		return count;
 	}
+	
+	// hit
+	public int hit(int no) {
+		int count = -1;
+		getConnection();
+		try {
+			String query = "";
+			query += " update board ";
+			query += " set hit = hit + 1 ";
+			query += " where no = ? ";
 
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, no);
+
+			count = pstmt.executeUpdate();
+
+			System.out.println("[hit " + count + "건 추가되었습니다.]");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+		return count;
+		
+	}
+	
+	
+	
+	
+	
 }

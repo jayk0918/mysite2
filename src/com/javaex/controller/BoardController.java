@@ -49,7 +49,7 @@ public class BoardController extends HttpServlet {
 			int no = Integer.parseInt(request.getParameter("no"));
 			BoardDao boardDao = new BoardDao();
 			BoardVo boardVo = boardDao.getInfo(no);
-			
+			boardDao.hit(no);
 			request.setAttribute("boardVo", boardVo);
 			
 			WebUtil.forward(request, response, "./WEB-INF/views/board/read.jsp");
